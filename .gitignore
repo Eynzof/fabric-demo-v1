@@ -1,23 +1,31 @@
 # Gradle
 .gradle
 build/
+bin/
 
 # IDE
 .idea
 *.iml
 *.ipr
 *.iws
-.vscode
+.vscode/
 .classpath
 .project
 .settings
-bin/
+.nb-gradle
 
 # Minecraft
 run/
-out/
+# 排除日志和截图，但保留目录本身（可选）
+#!run/logs/
+#!run/screenshots/
 
-# Other
+# OS
 .DS_Store
-*.swp
-*.bak
+Thumbs.db
+
+# Project Specific
+setup_and_run.sh
+# 如果你不希望将 gradle wrapper 的二进制文件提交（有些团队习惯提交，有些不提交）
+# gradle/wrapper/gradle-wrapper.jar
+# !gradle/wrapper/gradle-wrapper.properties
