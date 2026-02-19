@@ -13,8 +13,10 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.NbtCompound;
-import net.minecraft.screen.NamedScreenHandlerFactory;
+import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.screen.PropertyDelegate;
+import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.Text;
 import net.minecraft.util.collection.DefaultedList;
@@ -23,7 +25,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class AlchemicalCrucibleBlockEntity extends BlockEntity
-        implements NamedScreenHandlerFactory, ImplementedInventory {
+        implements ExtendedScreenHandlerFactory, ImplementedInventory {
     private final DefaultedList<ItemStack> inventory = DefaultedList.ofSize(3, ItemStack.EMPTY);
 
     protected final PropertyDelegate propertyDelegate;
@@ -71,6 +73,11 @@ public class AlchemicalCrucibleBlockEntity extends BlockEntity
     @Override
     public ScreenHandler createMenu(int syncId, PlayerInventory playerInventory, PlayerEntity player) {
         return new AlchemicalCrucibleScreenHandler(syncId, playerInventory, this, this.propertyDelegate);
+    }
+
+    @Override
+    public void writeScreenOpeningData(ServerPlayerEntity player, PacketByteBuf buf) {
+        // 如果有需要传给客户端的数据可以在这里写
     }
 
     @Override

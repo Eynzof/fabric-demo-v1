@@ -10,8 +10,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 
 public class AlchemicalCrucibleScreen extends HandledScreen<AlchemicalCrucibleScreenHandler> {
-    private static final Identifier TEXTURE = new Identifier(MyFabricMod.MOD_ID,
-            "textures/gui/alchemical_crucible.png");
+    private static final Identifier TEXTURE = new Identifier("minecraft", "textures/gui/container/furnace.png");
 
     public AlchemicalCrucibleScreen(AlchemicalCrucibleScreenHandler handler, PlayerInventory inventory, Text title) {
         super(handler, inventory, title);
@@ -39,7 +38,11 @@ public class AlchemicalCrucibleScreen extends HandledScreen<AlchemicalCrucibleSc
 
     private void renderProgressArrow(DrawContext context, int x, int y) {
         if (handler.isCrafting()) {
-            context.drawTexture(TEXTURE, x + 85, y + 30, 176, 0, 8, handler.getScaledProgress());
+            // 熔炉水平箭头的纹理坐标和位置
+            // 目标位置: x + 79, y + 34
+            // 纹理位置: 176, 14
+            // 尺寸: 24 x 17
+            context.drawTexture(TEXTURE, x + 79, y + 34, 176, 14, handler.getScaledProgress(), 17);
         }
     }
 

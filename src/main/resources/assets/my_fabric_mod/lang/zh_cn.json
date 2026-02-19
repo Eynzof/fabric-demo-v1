@@ -1,3 +1,5 @@
 {
-    "item.my_fabric_mod.philosophers_stone": "贤者之石"
+    "item.my_fabric_mod.philosophers_stone": "贤者之石",
+    "item.my_fabric_mod.mercury": "水银锭",
+    "block.my_fabric_mod.alchemical_crucible": "炼金锅"
 }

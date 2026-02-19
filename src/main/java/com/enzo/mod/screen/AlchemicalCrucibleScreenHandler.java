@@ -56,7 +56,7 @@ public class AlchemicalCrucibleScreenHandler extends ScreenHandler {
     public int getScaledProgress() {
         int progress = this.propertyDelegate.get(0);
         int maxProgress = this.propertyDelegate.get(1); // Max Progress
-        int progressArrowSize = 26; // 进度条图片的宽度/高度
+        int progressArrowSize = 24; // 进度条箭头的总长度 (熔炉为 24)
 
         return maxProgress != 0 && progress != 0 ? progress * progressArrowSize / maxProgress : 0;
     }
