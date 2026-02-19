@@ -1,42 +1,69 @@
-# My Fabric Mod - 贤者之石 (Philosopher's Stone)
+# My Fabric Mod - 炼金术入门 (Alchemy Basics)
 
-这是一个基于 Fabric Loader 的 Minecraft (1.20.1) 模组演示项目。
+这是一个基于 Fabric Loader 的 Minecraft (1.20.1) 模组演示项目，展示了自定义物品、功能方块、GUI、以及复杂的合成模型。
 
-## 🌟 核心功能：贤者之石
+## 🌟 核心功能
 
-本模组添加了一个极具魔力的物品：**贤者之石 (Philosopher's Stone)**。
-*   **点石成金**: 手持贤者之石，对着世界中的 **铁块 (Iron Block)** 或 **铜块 (Copper Block)** 点击 **右键**，它们会瞬间转化为价值连城的 **金块 (Gold Block)**。
-*   **获取方式**: 在创造模式的“工具与武器” (Tools & Utilities) 选项卡中可以找到，或者直接搜索名称获取。
+### 1. 炼金锅 (Alchemical Crucible) — 功能方块
+*   **用途**: 用于处理原材料以提取炼金产物。
+*   **操作**: 拥有类似熔炉的自定义 GUI 界面。需要放入**煤炭或木炭**作为燃料。
+*   **炼制逻辑**: 放入**红石粉**作为原材料，经过一段时间的炼制，可以产出**水银锭**。
 
-## 🛠️ 环境要求
+### 2. 水银锭 (Mercury Ingot) — 炼金产物
+*   **描述**: 通过炼金锅提炼出的液体金属，是合成高级炼金法器的核心材料。
 
-*   **Minecraft 版本**: 1.20.1
-*   **Java**: 17 (推荐使用 SDKMAN 安装 Zulu 17)
-*   **Fabric API**: 已集成在构建依赖中
+### 3. 贤者之石 (Philosopher's Stone) — 传奇物品
+*   **点石成金**: 手持贤者之石，对着世界中的 **铁块 (Iron Block)** 或 **铜块 (Copper Block)** 点击 **右键**，将其转化为 **金块 (Gold Block)**。
+*   **耐久说明**: 作为强大的法器，它是消耗品，使用时会消耗耐久。
 
-## 🚀 如何运行
+## ⚒️ 合成配方 (Recipes)
 
-如果你在本地已经安装了 [SDKMAN](https://sdkman.io/)，可以直接使用我为你准备的自动化脚本：
+### 炼金锅
+在工作台中摆放铁锭成 U 型，中心放入一个金锭：
+```
+铁 🔌 铁
+铁 金 铁
+铁 铁 铁
+```
 
+### 贤者之石
+使用钻石、水银锭和金锭合成：
+*   **图案**:
+    ```
+    钻石 水银 钻石
+    水银 金锭 水银
+    钻石 水银 钻石
+    ```
+
+## 🚀 开发与编译指南
+
+本快速入门项目提供了两个自动化脚本，旨在简化 SDK 管理。
+
+### 1. 开发调试 (运行游戏)
 ```bash
-# 进入项目目录
-cd fabric-demo-v1
-
-# 运行自动化配置并启动游戏
+# 自动配置 Java 17/Gradle 8.7 运行环境并启动游戏
 bash setup_and_run.sh
 ```
 
-该脚本会自动完成：
-1. 切换 Java 17 运行环境。
-2. 安装并配置 Gradle 8.7。
-3. 生成 Gradle Wrapper。
-4. 编译项目并启动游戏客户端。
+### 2. 打包发布 (生成 JAR)
+```bash
+# 执行清理并编译生成的混淆后的 Mod JAR 文件
+bash build_mod.sh
+```
+*   **产物位置**: `build/libs/my-fabric-mod-1.0.0.jar`
 
-## 📁 项目结构
+## 🛠️ 技术细节
 
-*   `src/main/java/com/enzo/mod/item/PhilosophersStoneItem.java`: 包含点金转化的核心逻辑。
-*   `src/main/java/com/enzo/mod/item/ModItems.java`: 物品注册与创造栏添加逻辑。
-*   `src/main/resources/assets/my_fabric_mod/`: 包含语言包 (i18n) 和物品模型定义。
+*   **Minecraft 版本**: 1.20.1
+*   **Fabric API**: 0.92.2+1.20.1
+*   **核心特性**:
+    *   **容器系统 (Inventory)**: 实现了 `ImplementedInventory` 接口处理方块实体库存。
+    *   **自定义 GUI**: 实现了 `ExtendedScreenHandlerFactory` 以支持服务端-客户端数据同步，并复用了原版熔炉贴图以保持视觉统一。
+    *   **方块实体 (Block Entity)**: 使用 `BlockEntityTicker` 实现动态炼制进度。
 
-## 📝 备注
-目前由于资源生成限制，贤者之石在物品栏中显示为丢失贴图（紫黑块）。你可以手动将贴图文件放置在 `src/main/resources/assets/my_fabric_mod/textures/item/philosophers_stone.png`。
+## 📁 关键代码位置
+
+*   `com.enzo.mod.block.AlchemicalCrucibleBlock`: 炼金锅方块实现。
+*   `com.enzo.mod.block.entity.AlchemicalCrucibleBlockEntity`: 炼金锅核心逻辑（消耗燃料、进度计算）。
+*   `com.enzo.mod.screen.AlchemicalCrucibleScreen`: 客户端 GUI 渲染逻辑。
+*   `com.enzo.mod.item.PhilosophersStoneItem`: 贤者之石点击转化的业务逻辑。
