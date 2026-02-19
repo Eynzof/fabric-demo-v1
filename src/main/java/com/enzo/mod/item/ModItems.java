@@ -11,9 +11,12 @@ import net.minecraft.util.Identifier;
 
 public class ModItems {
 
-    // 注册贤者之石
+    // 注册物品
     public static final Item PHILOSOPHERS_STONE = registerItem("philosophers_stone",
             new PhilosophersStoneItem(new FabricItemSettings().maxCount(1)));
+
+    public static final Item MERCURY = registerItem("mercury",
+            new Item(new FabricItemSettings()));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(MyFabricMod.MOD_ID, name), item);
@@ -25,6 +28,12 @@ public class ModItems {
         // 将物品添加到创造模式物品栏（工具栏）
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(content -> {
             content.add(PHILOSOPHERS_STONE);
+            content.add(MERCURY);
+        });
+
+        // 将炼金锅添加到创造模式物品栏（功能方块）
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(content -> {
+            content.add(com.enzo.mod.block.ModBlocks.ALCHEMICAL_CRUCIBLE);
         });
     }
 }

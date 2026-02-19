@@ -15,6 +15,10 @@ public class MyFabricMod implements ModInitializer {
         // Proceed with mild caution.
 
         com.enzo.mod.item.ModItems.registerModItems();
+        com.enzo.mod.block.ModBlocks.registerModBlocks();
+        com.enzo.mod.block.entity.ModBlockEntities.registerBlockEntities();
+        com.enzo.mod.screen.ModScreenHandlers.registerScreenHandlers();
+
         LOGGER.info("Hello Fabric world!");
     }
 }

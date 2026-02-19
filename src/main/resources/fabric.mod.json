@@ -17,6 +17,9 @@
     "entrypoints": {
         "main": [
             "com.enzo.mod.MyFabricMod"
+        ],
+        "client": [
+            "com.enzo.mod.MyFabricModClient"
         ]
     },
     "mixins": [
