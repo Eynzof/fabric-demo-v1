@@ -2,23 +2,20 @@
     "type": "minecraft:crafting_shaped",
     "category": "misc",
     "pattern": [
-        "DCD",
-        "CGC",
-        "DCD"
+        "I I",
+        "IGI",
+        "III"
     ],
     "key": {
-        "D": {
-            "item": "minecraft:diamond"
-        },
-        "C": {
-            "item": "my_fabric_mod:mercury"
+        "I": {
+            "item": "minecraft:iron_ingot"
         },
         "G": {
             "item": "minecraft:gold_ingot"
         }
     },
     "result": {
-        "item": "my_fabric_mod:philosophers_stone",
+        "item": "my_fabric_mod:alchemical_crucible",
         "count": 1
     }
 }
