@@ -28,7 +28,7 @@ public class ModItems {
             new Item(new FabricItemSettings().rarity(net.minecraft.util.Rarity.RARE)));
 
     public static final Item BUDDHAS_FURY_LOTUS = registerItem("buddhas_fury_lotus",
-            new Item(new FabricItemSettings().rarity(net.minecraft.util.Rarity.EPIC).maxCount(1)));
+            new BuddhasFuryLotusItem(new FabricItemSettings().rarity(net.minecraft.util.Rarity.EPIC).maxCount(1)));
 
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(MyFabricMod.MOD_ID, name), item);
