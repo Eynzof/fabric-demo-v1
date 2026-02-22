@@ -33,6 +33,9 @@ public class ModItems {
     public static final Item CLEAR_SKY_HAMMER = registerItem("clear_sky_hammer",
             new ClearSkyHammerItem(new FabricItemSettings().rarity(net.minecraft.util.Rarity.EPIC).maxCount(1)));
 
+    public static final Item GUANYIN_TEAR = registerItem("guanyin_tear",
+            new GuanyinTearItem(new FabricItemSettings().rarity(net.minecraft.util.Rarity.EPIC).maxCount(64)));
+
     public static final Item BUDDHAS_FURY_LOTUS = registerItem("buddhas_fury_lotus",
             new BuddhasFuryLotusItem(new FabricItemSettings().rarity(net.minecraft.util.Rarity.EPIC).maxCount(1)));
 
@@ -63,9 +66,10 @@ public class ModItems {
             content.add(LAUNCH_MECHANISM);
         });
 
-        // 将昊天锤添加到工具栏
+        // 将昊天锤和观音有泪添加到工具栏
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(content -> {
             content.add(CLEAR_SKY_HAMMER);
+            content.add(GUANYIN_TEAR);
         });
     }
 }

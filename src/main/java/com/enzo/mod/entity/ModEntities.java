@@ -18,6 +18,15 @@ public class ModEntities {
                     .build()
     );
 
+    public static final EntityType<GuanyinTearEntity> GUANYIN_TEAR_ENTITY_TYPE = Registry.register(
+            Registries.ENTITY_TYPE,
+            new Identifier(MyFabricMod.MOD_ID, "guanyin_tear_entity"),
+            FabricEntityTypeBuilder.<GuanyinTearEntity>create(SpawnGroup.MISC, GuanyinTearEntity::new)
+                    .dimensions(EntityDimensions.fixed(0.25f, 0.25f))
+                    .trackRangeBlocks(4).trackedUpdateRate(10)
+                    .build()
+    );
+
     public static void registerEntities() {
         MyFabricMod.LOGGER.info("Registering Entities for " + MyFabricMod.MOD_ID);
     }

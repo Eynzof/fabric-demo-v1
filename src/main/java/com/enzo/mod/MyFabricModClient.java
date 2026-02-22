@@ -14,5 +14,6 @@ public class MyFabricModClient implements ClientModInitializer {
         HandledScreens.register(ModScreenHandlers.ALCHEMICAL_CRUCIBLE_SCREEN_HANDLER, AlchemicalCrucibleScreen::new);
 
         EntityRendererRegistry.register(ModEntities.BUDDHAS_FURY_LOTUS_TYPE, FlyingItemEntityRenderer::new);
+        EntityRendererRegistry.register(ModEntities.GUANYIN_TEAR_ENTITY_TYPE, FlyingItemEntityRenderer::new);
     }
 }
