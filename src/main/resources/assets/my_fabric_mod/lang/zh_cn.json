@@ -1,5 +1,9 @@
 {
     "item.my_fabric_mod.philosophers_stone": "贤者之石",
     "item.my_fabric_mod.mercury": "水银锭",
+    "item.my_fabric_mod.lotus_core": "莲之核心",
+    "item.my_fabric_mod.launch_mechanism": "发射机关",
+    "item.my_fabric_mod.damage_core": "伤害核心",
+    "item.my_fabric_mod.buddhas_fury_lotus": "佛怒唐莲",
     "block.my_fabric_mod.alchemical_crucible": "炼金锅"
 }

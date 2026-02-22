@@ -1,5 +1,9 @@
 {
     "item.my_fabric_mod.philosophers_stone": "Philosopher's Stone",
     "item.my_fabric_mod.mercury": "Mercury ingot",
+    "item.my_fabric_mod.lotus_core": "Lotus Core",
+    "item.my_fabric_mod.launch_mechanism": "Launch Mechanism",
+    "item.my_fabric_mod.damage_core": "Damage Core",
+    "item.my_fabric_mod.buddhas_fury_lotus": "Buddha's Fury Lotus",
     "block.my_fabric_mod.alchemical_crucible": "Alchemical Crucible"
 }

@@ -1,0 +1,23 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "DLD",
+        "LSL",
+        "DLD"
+    ],
+    "key": {
+        "D": {
+            "item": "my_fabric_mod:damage_core"
+        },
+        "L": {
+            "item": "my_fabric_mod:launch_mechanism"
+        },
+        "S": {
+            "item": "my_fabric_mod:lotus_core"
+        }
+    },
+    "result": {
+        "item": "my_fabric_mod:buddhas_fury_lotus",
+        "count": 1
+    }
+}

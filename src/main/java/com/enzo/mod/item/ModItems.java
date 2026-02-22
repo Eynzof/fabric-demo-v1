@@ -18,6 +18,18 @@ public class ModItems {
     public static final Item MERCURY = registerItem("mercury",
             new Item(new FabricItemSettings()));
 
+    public static final Item LOTUS_CORE = registerItem("lotus_core",
+            new Item(new FabricItemSettings().rarity(net.minecraft.util.Rarity.EPIC)));
+
+    public static final Item LAUNCH_MECHANISM = registerItem("launch_mechanism",
+            new Item(new FabricItemSettings()));
+
+    public static final Item DAMAGE_CORE = registerItem("damage_core",
+            new Item(new FabricItemSettings().rarity(net.minecraft.util.Rarity.RARE)));
+
+    public static final Item BUDDHAS_FURY_LOTUS = registerItem("buddhas_fury_lotus",
+            new Item(new FabricItemSettings().rarity(net.minecraft.util.Rarity.EPIC).maxCount(1)));
+
     private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(MyFabricMod.MOD_ID, name), item);
     }
@@ -28,12 +40,20 @@ public class ModItems {
         // 将物品添加到创造模式物品栏（工具栏）
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.TOOLS).register(content -> {
             content.add(PHILOSOPHERS_STONE);
+            content.add(BUDDHAS_FURY_LOTUS);
+        });
+
+        // 将物品添加到创造模式物品栏（原材料）
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(content -> {
             content.add(MERCURY);
+            content.add(LOTUS_CORE);
+            content.add(DAMAGE_CORE);
         });
 
         // 将炼金锅添加到创造模式物品栏（功能方块）
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(content -> {
             content.add(com.enzo.mod.block.ModBlocks.ALCHEMICAL_CRUCIBLE);
+            content.add(LAUNCH_MECHANISM);
         });
     }
 }
