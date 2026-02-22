@@ -27,6 +27,12 @@ public class ModItems {
     public static final Item DAMAGE_CORE = registerItem("damage_core",
             new Item(new FabricItemSettings().rarity(net.minecraft.util.Rarity.RARE)));
 
+    public static final Item HAMMER_CORE = registerItem("hammer_core",
+            new Item(new FabricItemSettings().rarity(net.minecraft.util.Rarity.RARE)));
+
+    public static final Item CLEAR_SKY_HAMMER = registerItem("clear_sky_hammer",
+            new ClearSkyHammerItem(new FabricItemSettings().rarity(net.minecraft.util.Rarity.EPIC).maxCount(1)));
+
     public static final Item BUDDHAS_FURY_LOTUS = registerItem("buddhas_fury_lotus",
             new BuddhasFuryLotusItem(new FabricItemSettings().rarity(net.minecraft.util.Rarity.EPIC).maxCount(1)));
 
@@ -48,12 +54,18 @@ public class ModItems {
             content.add(MERCURY);
             content.add(LOTUS_CORE);
             content.add(DAMAGE_CORE);
+            content.add(HAMMER_CORE);
         });
 
         // 将炼金锅添加到创造模式物品栏（功能方块）
         ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(content -> {
             content.add(com.enzo.mod.block.ModBlocks.ALCHEMICAL_CRUCIBLE);
             content.add(LAUNCH_MECHANISM);
+        });
+
+        // 将昊天锤添加到工具栏
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(content -> {
+            content.add(CLEAR_SKY_HAMMER);
         });
     }
 }

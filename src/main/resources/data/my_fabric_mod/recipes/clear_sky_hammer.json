@@ -1,0 +1,26 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "CCC",
+        "SNS",
+        "DND"
+    ],
+    "key": {
+        "C": {
+            "item": "my_fabric_mod:hammer_core"
+        },
+        "S": {
+            "item": "minecraft:nether_star"
+        },
+        "N": {
+            "item": "minecraft:netherite_ingot"
+        },
+        "D": {
+            "item": "minecraft:diamond"
+        }
+    },
+    "result": {
+        "item": "my_fabric_mod:clear_sky_hammer",
+        "count": 1
+    }
+}

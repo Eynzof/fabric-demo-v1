@@ -1,0 +1,6 @@
+{
+    "parent": "item/handheld",
+    "textures": {
+        "layer0": "my_fabric_mod:item/clear_sky_hammer"
+    }
+}
