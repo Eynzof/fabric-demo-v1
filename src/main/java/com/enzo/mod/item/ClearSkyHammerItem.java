@@ -41,6 +41,8 @@ public class ClearSkyHammerItem extends Item {
     @Override
     public TypedActionResult<ItemStack> use(World world, PlayerEntity user, Hand hand) {
         ItemStack itemStack = user.getStackInHand(hand);
+        // 播放开始格挡的音效
+        world.playSound(null, user.getX(), user.getY(), user.getZ(), SoundEvents.BLOCK_ANVIL_PLACE, SoundCategory.PLAYERS, 1.0f, 1.0f);
         user.setCurrentHand(hand);
         return TypedActionResult.consume(itemStack);
     }
