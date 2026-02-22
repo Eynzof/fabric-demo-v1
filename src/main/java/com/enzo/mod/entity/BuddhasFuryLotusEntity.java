@@ -4,6 +4,7 @@ import com.enzo.mod.item.ModItems;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.FlyingItemEntity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.TntEntity;
 import net.minecraft.entity.data.DataTracker;
 import net.minecraft.entity.data.TrackedData;
@@ -13,12 +14,15 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.network.packet.s2c.play.EntitySpawnS2CPacket;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
-import net.minecraft.world.explosion.Explosion;
+import java.util.UUID;
 
 public class BuddhasFuryLotusEntity extends Entity implements FlyingItemEntity {
     private static final TrackedData<ItemStack> ITEM = DataTracker.registerData(BuddhasFuryLotusEntity.class, TrackedDataHandlerRegistry.ITEM_STACK);
     private int fuse = 100; // 5秒 = 100 tick
+    private LivingEntity target;
+    private UUID targetUuid;
 
     public BuddhasFuryLotusEntity(EntityType<? extends Entity> type, World world) {
         super(type, world);
@@ -29,6 +33,13 @@ public class BuddhasFuryLotusEntity extends Entity implements FlyingItemEntity {
         this.setPosition(x, y, z);
         this.setStack(new ItemStack(ModItems.BUDDHAS_FURY_LOTUS));
         this.noClip = true; // 升空时穿过方块或保持稳定
+    }
+
+    public void setTarget(LivingEntity target) {
+        this.target = target;
+        if (target != null) {
+            this.targetUuid = target.getUuid();
+        }
     }
 
     @Override
@@ -54,6 +65,9 @@ public class BuddhasFuryLotusEntity extends Entity implements FlyingItemEntity {
             this.setVelocity(0, 0.05, 0);
             this.move(net.minecraft.entity.MovementType.SELF, this.getVelocity());
 
+            // 锁定目标位置
+            updateTargetPosition();
+
             fuse--;
             if (fuse <= 0) {
                 explode();
@@ -64,6 +78,22 @@ public class BuddhasFuryLotusEntity extends Entity implements FlyingItemEntity {
             if (this.getWorld() instanceof ServerWorld serverWorld) {
                 serverWorld.spawnParticles(ParticleTypes.SMOKE, this.getX(), this.getY(), this.getZ(), 2, 0.1, 0.1, 0.1, 0.01);
             }
+        }
+    }
+
+    private void updateTargetPosition() {
+        if (this.target == null && this.targetUuid != null && this.getWorld() instanceof ServerWorld serverWorld) {
+            Entity entity = serverWorld.getEntity(this.targetUuid);
+            if (entity instanceof LivingEntity living) {
+                this.target = living;
+            }
+        }
+
+        if (this.target != null && this.target.isAlive()) {
+            // 将生物位置锁定在唐莲上方1格
+            this.target.requestTeleport(this.getX(), this.getY() + 1.2, this.getZ());
+            this.target.setVelocity(Vec3d.ZERO); // 禁止其自主移动（简单锁定）
+            this.target.fallDistance = 0; // 防止掉落伤害积累
         }
     }
 
@@ -108,12 +138,18 @@ public class BuddhasFuryLotusEntity extends Entity implements FlyingItemEntity {
             this.setStack(ItemStack.fromNbt(nbt.getCompound("Item")));
         }
         this.fuse = nbt.getInt("Fuse");
+        if (nbt.containsUuid("TargetUuid")) {
+            this.targetUuid = nbt.getUuid("TargetUuid");
+        }
     }
 
     @Override
     protected void writeCustomDataToNbt(NbtCompound nbt) {
         nbt.put("Item", this.getStack().writeNbt(new NbtCompound()));
         nbt.putInt("Fuse", this.fuse);
+        if (this.targetUuid != null) {
+            nbt.putUuid("TargetUuid", this.targetUuid);
+        }
     }
 
     @Override

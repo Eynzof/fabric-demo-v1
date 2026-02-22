@@ -27,6 +27,8 @@ public class BuddhasFuryLotusItem extends Item {
         if (!world.isClient) {
             // 在目标敌人位置生成佛怒唐莲实体
             BuddhasFuryLotusEntity lotus = new BuddhasFuryLotusEntity(world, entity.getX(), entity.getY(), entity.getZ());
+            lotus.setTarget(entity);
+            lotus.setOwner(user);
             world.spawnEntity(lotus);
 
             // 消耗物品
